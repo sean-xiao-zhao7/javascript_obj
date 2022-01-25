@@ -1,10 +1,39 @@
-const person = {
-  name: 'Max',
-  age: 30,
-  hobbies: ['Sports', 'Cooking'],
-  greet: function() {
-    alert('Hi there!');
-  }
+const addBtn = document.getElementById("add-movie-btn");
+const searchMovieBtn = document.getElementById("search-btn");
+const movies = [];
+
+const renderMovies = () => {
+    const movielistElement = document.getElementById("movie-list");
+    movielistElement.innerHTML = "";
+    if (movies.length === 0) {
+        movielistElement.classList.remove("visible");
+        return;
+    } else {
+        movielistElement.classList.add("visible");
+    }
+
+    movies.forEach((movie) => {
+        const movieElement = document.createElement("li");
+        movieElement.textContent = movie.info.title;
+        movielistElement.append(movieElement);
+    });
 };
 
-person.greet();
+const addMovieHandler = () => {
+    const title = document.getElementById("title").value;
+    const extraName = document.getElementById("extra-name").value;
+    const extraValue = document.getElementById("extra-value").value;
+
+    const newMovie = {
+        info: {
+            title: title,
+            [extraValue]: extraValue,
+        },
+        id: Math.random(),
+    };
+
+    movies.push(newMovie);
+    renderMovies();
+};
+
+addBtn.addEventListener("click", addMovieHandler);
