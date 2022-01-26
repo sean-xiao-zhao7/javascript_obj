@@ -36,4 +36,8 @@ const addMovieHandler = () => {
     renderMovies();
 };
 
+function genRandom() {
+    return Math.floor(Math.random() * (10 - 5 + 1) + 5);
+}
+
 addBtn.addEventListener("click", addMovieHandler);
